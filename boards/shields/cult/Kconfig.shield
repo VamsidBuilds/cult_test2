@@ -1,0 +1,2 @@
+config SHIELD_CULT
+    def_bool $(shields_list_contains,cult)
