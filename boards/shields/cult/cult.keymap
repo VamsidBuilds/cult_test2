@@ -8,7 +8,7 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            bindings = 
+            bindings = <
                 &kp C_MUTE  &kp N7   &kp N8  &kp N9
                 &kp N4      &kp N5   &kp N6  &kp BSPC
                 &kp N1      &kp N2   &kp N3  &kp RET
@@ -18,7 +18,7 @@
         };
 
         lower_layer {
-            bindings = 
+            bindings = <
                 &kp C_MUTE  &kp F7  &kp F8  &kp F9
                 &kp F4      &kp F5  &kp F6  &kp DEL
                 &kp F1      &kp F2  &kp F3  &kp ESC
@@ -28,11 +28,11 @@
         };
 
         raise_layer {
-            bindings = 
-                &bootloader     &bt BT_SEL 0      &bt BT_SEL 1      &bt BT_SEL 2
-                &bt BT_CLR      &trans            &trans            &trans
-                &rgb_ug RGB_TOG &rgb_ug RGB_BRI_UP &rgb_ug RGB_BRI_DN &trans
-                &trans          &trans            &trans            &trans
+            bindings = <
+                &bootloader     &bt BT_SEL 0       &bt BT_SEL 1       &bt BT_SEL 2
+                &bt BT_CLR      &trans             &trans             &trans
+                &rgb_ug RGB_TOG &rgb_ug RGB_BRI_UP  &rgb_ug RGB_BRI_DN &trans
+                &trans          &trans             &trans             &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
