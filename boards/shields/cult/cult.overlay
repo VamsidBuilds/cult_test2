@@ -8,6 +8,12 @@
         zmk,underglow        = &led_strip;
     };
 
+    /* Sensor definition for ZMK 3.0+ */
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&encoder_0>;
+    };
+
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <4>;
@@ -44,26 +50,9 @@
         steps = <80>;
         status = "okay";
     };
-
-    sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&encoder_0>;
-        triggers-per-rotation = <20>;
-    };
 };
 
-/*
- * All LEDs on SPI3 via P1.04 (only reliable SPI for WS2812 on nRF52840)
- *
- * PCB wiring:
- *   nice!nano P1.04 --> Din  [SK6812-MINI-E #1]
- *                       Dout [SK6812-MINI-E #16] --> Din [WS2812B #1]
- *                                                     Dout [WS2812B #9] --> (end)
- *
- * P1.06 is no longer used for LEDs — leave it unconnected or use for something else
- *
- * Total chain-length = 16 (per-key SK6812) + 9 (underglow WS2812B) = 25
- */
+/* SPI3 and LED strip configuration */
 &pinctrl {
     spi3_default: spi3_default {
         group1 {
@@ -90,8 +79,10 @@
         reg = <0>;
         spi-max-frequency = <4000000>;
         chain-length = <25>;
+        reset-delay = <80>;  /* Recommended: 80-100µs for reliable reset */
         spi-one-frame  = <0x70>;
         spi-zero-frame = <0x40>;
+        /* SK6812 uses GRB order - this is correct */
         color-mapping  = <LED_COLOR_ID_GREEN
                           LED_COLOR_ID_RED
                           LED_COLOR_ID_BLUE>;
